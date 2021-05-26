@@ -57,7 +57,7 @@ class CalendarList extends Component {
   static defaultProps = {
     horizontal: false,
     calendarWidth: width,
-    calendarHeight: 360,
+    calendarHeight: 520, // modified
     pastScrollRange: 50,
     futureScrollRange: 50,
     showScrollIndicator: false,
@@ -117,8 +117,9 @@ class CalendarList extends Component {
   scrollToDay(d, offset, animated) {
     const day = parseDate(d);
     const diffMonths = Math.round(this.state.openDate.clone().setDate(1).diffMonths(day.clone().setDate(1)));
-    const size = this.props.horizontal ? this.props.calendarWidth : this.props.calendarHeight;
+    let size = this.props.horizontal ? this.props.calendarWidth : 520;
     let scrollAmount = (size * this.props.pastScrollRange) + (diffMonths * size) + (offset || 0);
+    console.log(`scrollToDay: ${size} ${this.props.pastScrollRange} ${diffMonths} ${offset} ${scrollAmount} 520`);
     
     if (!this.props.horizontal) {
       let week = 0;
@@ -126,20 +127,22 @@ class CalendarList extends Component {
       for (let i = 0; i < days.length; i++) {
         week = Math.floor(i / 7);
         if (dateutils.sameDate(days[i], day)) {
-          scrollAmount += 46 * week;
+          scrollAmount += 72 * week; // modified
           break;
         }
       }
     }
-    this.listView.scrollToOffset({offset: scrollAmount, animated});
+    console.log(scrollAmount);
+    this.listView.scrollToOffset({offset: scrollAmount + 14, animated}); // modified
   }
 
   scrollToMonth(m) {
     const month = parseDate(m);
     const scrollTo = month || this.state.openDate;
     let diffMonths = Math.round(this.state.openDate.clone().setDate(1).diffMonths(scrollTo.clone().setDate(1)));
-    const size = this.props.horizontal ? this.props.calendarWidth : this.props.calendarHeight;
+    const size = this.props.horizontal ? this.props.calendarWidth : 520;
     const scrollAmount = (size * this.props.pastScrollRange) + (diffMonths * size);
+    console.log(`scrollToMonth: ${size} ${this.props.pastScrollRange} ${diffMonths} ${scrollAmount}`);
 
     this.listView.scrollToOffset({offset: scrollAmount, animated: false});
   }
@@ -212,7 +215,7 @@ class CalendarList extends Component {
       <CalendarListItem
         scrollToMonth={this.scrollToMonth.bind(this)}
         item={item} 
-        calendarHeight={this.props.calendarHeight} 
+        calendarHeight={520} 
         calendarWidth={this.props.horizontal ? this.props.calendarWidth : undefined} 
         {...this.props} 
         style={this.props.calendarStyle}
@@ -222,8 +225,8 @@ class CalendarList extends Component {
 
   getItemLayout(data, index) {
     return {
-      length: this.props.horizontal ? this.props.calendarWidth : this.props.calendarHeight, 
-      offset: (this.props.horizontal ? this.props.calendarWidth : this.props.calendarHeight) * index, index
+      length: this.props.horizontal ? this.props.calendarWidth : 520, 
+      offset: (this.props.horizontal ? this.props.calendarWidth : 520) * index, index
     };
   }
 

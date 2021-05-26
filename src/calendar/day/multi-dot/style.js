@@ -27,10 +27,21 @@ export default function styleConstructor(theme={}) {
       borderRadius: 16
     },
     today: {
-      backgroundColor: appStyle.todayBackgroundColor
+      backgroundColor: appStyle.todayBackgroundColor,
+      borderWidth: 1,
+      borderStyle: 'dashed',
+      borderColor: 'black',
+      borderRadius: 5,
+      padding: 5
     },
     todayText: {
       color: appStyle.todayTextColor
+    },
+    weekendText: {
+      color: 'red'
+    },
+    holidayText :{
+      color: 'blue'
     },
     selectedText: {
       color: appStyle.selectedDayTextColor

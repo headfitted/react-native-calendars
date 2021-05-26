@@ -6,7 +6,7 @@ import styleConstructor from './style';
 
 class CalendarListItem extends Component {
   static displayName = 'IGNORE';
-  
+
   static defaultProps = {
     hideArrows: true,
     hideExtraDays: true
@@ -83,7 +83,7 @@ class CalendarListItem extends Component {
       const text = row.toString();
 
       return (
-        <View style={[{height: this.props.calendarHeight, width: this.props.calendarWidth}, this.style.placeholder]}>
+        <View style={[{height: 520, width: this.props.calendarWidth}, this.style.placeholder]}>
           <Text allowFontScaling={false} style={this.style.placeholderText}>{text}</Text>
         </View>
       );
