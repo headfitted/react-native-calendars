@@ -1,3 +1,9 @@
+**LOOKING FOR A MAINTAINER**
+We love this project, but currently we don’t have enough time to work on it. So we are looking for a maintainer. If you have enough time and knowledge and want to become one - please let us know (levv@wix.com, inbalti@wix.com, ethans@wix.com)
+
+---
+
+
 # React Native Calendars 🗓️ 📆
 [![Version](https://img.shields.io/npm/v/react-native-calendars.svg)](https://www.npmjs.com/package/react-native-calendars)
 [![Build Status](https://travis-ci.org/wix/react-native-calendars.svg?branch=master)](https://travis-ci.org/wix/react-native-calendars)
@@ -103,19 +109,13 @@ LocaleConfig.defaultLocale = 'fr';
   // Show week numbers to the left. Default = false
   showWeekNumbers={true}
   // Handler which gets executed when press arrow icon left. It receive a callback can go back month
-  onPressArrowLeft={subtractMonth => subtractMonth()}
+  onPressArrowLeft={substractMonth => substractMonth()}
   // Handler which gets executed when press arrow icon right. It receive a callback can go next month
   onPressArrowRight={addMonth => addMonth()}
   // Disable left arrow. Default = false
   disableArrowLeft={true}
   // Disable right arrow. Default = false
   disableArrowRight={true}
-  // Disable all touch events for disabled days. can be override with disableTouchEvent in markedDates
-  disableAllTouchEventsForDisabledDays={true}
-  // Replace default month and year title with custom one. the function receive a date as parameter.
-  renderHeader={(date) => {/*Return JSX*/}}
-  // Enable the option to swipe between months. Default = false
-  enableSwipeMonths={true}
 />
 ```
 
@@ -263,27 +263,7 @@ Custom marking allows you to customize each marker with custom styles.
 />
 ```
 
-**NEW!** While we still don't support multi marking type, we add the possibility to combine between `period` and `simple`.
-```javascript
-<Calendar
-  markingType={'period'}
-  markedDates={{
-    '2012-05-15': {marked: true, dotColor: '#50cebb'},
-    '2012-05-16': {marked: true, dotColor: '#50cebb'},
-    '2012-05-21': {startingDay: true, color: '#50cebb', textColor: 'white'},
-    '2012-05-22': {color: '#70d7c7', textColor: 'white'},
-    '2012-05-23': {color: '#70d7c7', textColor: 'white', marked: true, dotColor: 'white'},
-    '2012-05-24': {color: '#70d7c7', textColor: 'white'},
-    '2012-05-25': {endingDay: true, color: '#50cebb', textColor: 'white'},
-  }}
-/>
-```
-<kbd>
-  <img height=350 src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/multi-marking.png?raw=true">
-</kbd>
-<p></p>
-
-Keep in mind that different marking types are not compatible. You can use just one marking style for a calendar.
+Keep in mind that different marking types are not compatible. You can use just one marking style for calendar.
 
 #### Displaying data loading indicator
 
@@ -309,7 +289,6 @@ The loading indicator next to the month name will be displayed if `<Calendar/>` 
     backgroundColor: '#ffffff',
     calendarBackground: '#ffffff',
     textSectionTitleColor: '#b6c1cd',
-    textSectionTitleDisabledColor: '#d9e1e8',
     selectedDayBackgroundColor: '#00adf5',
     selectedDayTextColor: '#ffffff',
     todayTextColor: '#00adf5',
@@ -331,18 +310,6 @@ The loading indicator next to the month name will be displayed if `<Calendar/>` 
     textMonthFontSize: 16,
     textDayHeaderFontSize: 16
   }}
-/>
-```
-#### Customize days titles with disabled styling
-```javascript
-<Calendar
-    theme={{
-     textSectionTitleDisabledColor: '#d9e1e8'
-    }}
-    disabledDaysIndexes={[0, 6]}
-    markedDates={{
-    ...this.getDisabledDates('2012-05-01', '2012-05-30', [0, 6])
-    }}
 />
 ```
 
@@ -368,28 +335,6 @@ theme={{
   }
 }}
 ```
-
-#### Individual day header styling
-
-Using the above advanced styling, it is possible to set styles independently for each day's header. If we wanted to make the header for Sunday red, and Saturday blue, we could write something like the following:
-
-```javascript
-theme={{
-  'stylesheet.calendar.header': {
-    dayTextAtIndex0: {
-      color: 'red'
-    },
-    dayTextAtIndex6: {
-      color: 'blue'
-    }
-  }
-}}
-```
-
-<kbd>
-  <img height=50 src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/day-header-style.png?raw=true">
-</kbd>
-<p></p>
 
 **Disclaimer**: Issues that arise because something breaks after using stylesheet override will not be supported. Use this option at your own risk.
 

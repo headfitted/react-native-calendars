@@ -1,34 +1,22 @@
-import React, {useState} from 'react';
+import React, {Component} from 'react';
+import {View} from 'react-native';
 import {CalendarList} from 'react-native-calendars';
 
-const testIDs = require('../testIDs');
-const initialDate = '2020-05-16';
 
-const HorizontalCalendarList = () => {
-  const [selected, setSelected] = useState(initialDate);
-  const markedDates = {
-    [selected]: {
-      selected: true,
-      selectedColor: '#DFA460'
-    }
-  };
-
-  const onDayPress = day => {
-    setSelected(day.dateString);
-  };
-
-  return (
-    <CalendarList
-      testID={testIDs.horizontalList.CONTAINER}
-      markedDates={markedDates}
-      current={initialDate}
-      pastScrollRange={24}
-      futureScrollRange={24}
-      horizontal
-      pagingEnabled
-      onDayPress={onDayPress}
-    />
-  );
-};
-
-export default HorizontalCalendarList;
+export default class HorizontalCalendarList extends Component {
+  
+  render() {
+    return (
+      <View>
+        <CalendarList
+          current={'2012-05-16'}
+          pastScrollRange={24}
+          futureScrollRange={24}
+          horizontal
+          pagingEnabled
+          style={{borderBottomWidth: 1, borderBottomColor: 'lightgrey'}}
+        />
+      </View>
+    );
+  }
+}

@@ -1,13 +1,13 @@
 import {StyleSheet, Platform} from 'react-native';
 import * as defaultStyle from '../style';
 
+
 const commons = require('./commons');
 const STYLESHEET_ID = 'stylesheet.expandable.main';
-export const HEADER_HEIGHT = 68;
 
 export default function styleConstructor(theme = {}) {
   const appStyle = {...defaultStyle, ...theme};
-
+  
   return StyleSheet.create({
     containerShadow: {
       backgroundColor: appStyle.calendarBackground,
@@ -23,9 +23,6 @@ export default function styleConstructor(theme = {}) {
           elevation: 3
         }
       })
-    },
-    containerWrapper: {
-      paddingBottom: 6
     },
     container: {
       backgroundColor: appStyle.calendarBackground
@@ -54,7 +51,6 @@ export default function styleConstructor(theme = {}) {
       paddingTop: 24, // 8
       paddingBottom: 8,
       paddingLeft: 20,
-      paddingRight: 20,
       backgroundColor: appStyle.calendarBackground,
       textAlign: 'left',
       textTransform: 'uppercase'
@@ -89,22 +85,6 @@ export default function styleConstructor(theme = {}) {
     monthView: {
       backgroundColor: appStyle.calendarBackground
     },
-    weekContainer: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      top: HEADER_HEIGHT + (commons.isAndroid ? 8 : 4), // align row on top of calendar's first row
-    },
-    hidden: {
-      opacity: 0
-    },
-    visible: {
-      opacity: 1
-    },
-    weekCalendar: {
-      marginTop: 12, 
-      marginBottom: -2
-    },
     week: {
       marginTop: 7,
       marginBottom: 7,
@@ -112,13 +92,6 @@ export default function styleConstructor(theme = {}) {
       paddingLeft: 15,
       flexDirection: 'row',
       justifyContent: 'space-around'
-    },
-    dayContainer: {
-      flex: 1, 
-      alignItems: 'center'
-    },
-    emptyDayContainer: {
-      flex: 1
     },
     dayHeader: {
       width: 32,
@@ -129,8 +102,7 @@ export default function styleConstructor(theme = {}) {
       color: appStyle.textSectionTitleColor
     },
     arrowImage: {
-      tintColor: appStyle.arrowColor,
-      transform: commons.isRTL ? [{scaleX: -1}] : undefined
+      tintColor: appStyle.arrowColor
     },
     todayButtonContainer: {
       alignItems: appStyle.todayButtonPosition === 'right' ? 'flex-end' : 'flex-start',

@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-const _ = require('lodash');
-const fs = require('fs');
-const semver = require('semver');
 const exec = require('shell-utils').exec;
+const semver = require('semver');
+const fs = require('fs');
+const _ = require('lodash');
 
-const ONLY_ON_BRANCH = 'origin/release';
+const ONLY_ON_BRANCH = 'origin/master';
 const VERSION_TAG = 'latest';
 const VERSION_INC = 'minor';
 
@@ -12,7 +12,6 @@ function run() {
   if (!validateEnv()) {
     return;
   }
-  
   setupGit();
   createNpmRc();
   versionTagAndPublish();

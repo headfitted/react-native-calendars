@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
+import {TouchableOpacity, Text} from 'react-native';
 import PropTypes from 'prop-types';
-import {shouldUpdate} from '../../../component-updater';
 
 import styleConstructor from './style';
+import {shouldUpdate} from '../../../component-updater';
 
 
 class Day extends Component {
@@ -11,7 +11,7 @@ class Day extends Component {
   
   static propTypes = {
     // TODO: disabled props should be removed
-    state: PropTypes.oneOf(['disabled', 'today', '']),
+    state: PropTypes.oneOf(['selected', 'disabled', 'today', '']),
     // Specify theme properties to override specific styles for calendar parts. Default = {}
     theme: PropTypes.object,
     marking: PropTypes.any,
@@ -41,9 +41,8 @@ class Day extends Component {
   }
 
   render() {
-    const containerStyle = [this.style.base];
-    const textStyle = [this.style.text];
-    const dotStyle = [this.style.dot];
+    let containerStyle = [this.style.base];
+    let textStyle = [this.style.text];
     
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
@@ -51,34 +50,30 @@ class Day extends Component {
         marking: true
       };
     }
-    
+
     const isDisabled = typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled';
     
-    let dot;
-    if (marking.marked) {
-      dotStyle.push(this.style.visibleDot);
-      if (isDisabled) {
-        dotStyle.push(this.style.disabledDot);
-      }
-      if (marking.dotColor) {
-        dotStyle.push({backgroundColor: marking.dotColor});
-      }
-      dot = (<View style={dotStyle}/>);
-    }
-
     if (marking.selected) {
       containerStyle.push(this.style.selected);
-      if (marking.selectedColor) {
-        containerStyle.push({backgroundColor: marking.selectedColor});
-      }
-      dotStyle.push(this.style.selectedDot);
       textStyle.push(this.style.selectedText);
     } else if (isDisabled) {
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
       containerStyle.push(this.style.today);
       textStyle.push(this.style.todayText);
-      dotStyle.push(this.style.todayDot);
+    }
+
+    if (marking.customStyles && typeof marking.customStyles === 'object') {
+      const styles = marking.customStyles;
+      if (styles.container) {
+        if (styles.container.borderRadius === undefined) {
+          styles.container.borderRadius = 16;
+        }
+        containerStyle.push(styles.container);
+      }
+      if (styles.text) {
+        textStyle.push(styles.text);
+      }
     }
 
     return (
@@ -93,7 +88,6 @@ class Day extends Component {
         accessibilityLabel={this.props.accessibilityLabel}
       >
         <Text allowFontScaling={false} style={textStyle}>{String(this.props.children)}</Text>
-        {dot}
       </TouchableOpacity>
     );
   }

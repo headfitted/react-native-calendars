@@ -5,12 +5,9 @@ const STYLESHEET_ID = 'stylesheet.agenda.list';
 
 export default function styleConstructor(theme = {}) {
   const appStyle = {...defaultStyle, ...theme};
-  return StyleSheet.create({
+  return  StyleSheet.create({
     container: {
       flexDirection: 'row'
-    },
-    innerContainer: {
-      flex: 1
     },
     dayNum: {
       fontSize: 28,
@@ -34,9 +31,6 @@ export default function styleConstructor(theme = {}) {
     },
     today: {
       color: appStyle.agendaTodayColor
-    },
-    indicator: {
-      marginTop: 80
     },
     ...(theme[STYLESHEET_ID] || {})
   });

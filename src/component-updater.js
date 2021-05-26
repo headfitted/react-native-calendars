@@ -10,20 +10,6 @@ function shouldUpdate(a, b, paths) {
   return false;
 }
 
-function extractComponentProps(component, props, ignoreProps) {
-  const componentPropTypes = component.propTypes;
-  if (componentPropTypes) {
-    const keys = Object.keys(componentPropTypes);
-    const componentProps = _.chain(props)
-      .pickBy((_value, key) => _.includes(keys, key))
-      .omit(ignoreProps)
-      .value();
-    return componentProps;
-  }
-  return {};
-}
-
 module.exports = {
-  shouldUpdate,
-  extractComponentProps
+  shouldUpdate
 };
