@@ -79,8 +79,10 @@ class Day extends Component {
 
     if (new Date(this.props.date.dateString).getDay() == 6 || new Date(this.props.date.dateString).getDay() == 0) {
       textStyle.push(this.style.weekendText);
-    }else if (String(global.myHoliday[0]).split(',').indexOf(this.props.date.dateString) != -1) {
-      textStyle.push(this.style.holidayText);
+    }else if (global.myHoliday) {
+      if (String(global.myHoliday[0]).split(',').indexOf(this.props.date.dateString) != -1) {
+        textStyle.push(this.style.holidayText);
+      }
     }
 
     return (
