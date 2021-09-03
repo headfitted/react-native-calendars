@@ -238,6 +238,12 @@ export default class AgendaView extends Component {
     }
   }
 
+  enableCalendarScrollingOnly() {
+    this.setState({
+      calendarScrollable: true
+    });
+  }
+
   enableCalendarScrolling() {
     this.setState({
       calendarScrollable: true
