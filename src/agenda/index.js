@@ -269,13 +269,16 @@ export default class AgendaView extends Component {
 
   chooseDay(d, optimisticScroll) {
     const day = parseDate(d);
-
+    let expandCal = false;
+    if (this.props.markedDates[d.dateString] === undefined || this.props.markedDates[d.dateString] === null) {
+      expandCal = true;
+    }
     this.setState({
-      calendarScrollable: false,
+      calendarScrollable: expandCal,
       selectedDay: day.clone()
     });
 
-    if (this.props.onCalendarToggled) {
+    if (this.props.onCalendarToggled && !expandCal) {
       this.props.onCalendarToggled(false);
     }
 
@@ -285,7 +288,11 @@ export default class AgendaView extends Component {
       });
     }
 
-    this.setScrollPadPosition(this.initialScrollPadPosition(), true);
+    if (!expandCal) {
+      this.setScrollPadPosition(this.initialScrollPadPosition(), true);
+    } else {
+      this.setScrollPadPosition(0, true);
+    }
     this.calendar.scrollToDay(day, this.calendarOffset(), true);
 
     if (this.props.loadItemsForMonth) {
